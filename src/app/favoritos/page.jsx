@@ -7,12 +7,15 @@ import { useEffect, useState } from "react";
 
 const Favoritos = () => {
   const [libros, setLibros] = useState([]);
-  const usuario = JSON.parse(localStorage?.getItem("user"));
+  const [usuario, setUsuario] = useState(null);
 
   useEffect(() => {
+    const storedUser = JSON.parse(localStorage.getItem("user"));
+    setUsuario(storedUser);
     const fetchData = async () => {
       try {
         const token = localStorage?.getItem("token");
+        if (!token) return;
         const data = await fetch("/api/favoritos", {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -24,7 +27,7 @@ const Favoritos = () => {
         console.log(error);
       }
     };
-    fetchData();
+    if (storedUser) fetchData();
   }, []);
 
   if (!usuario)
