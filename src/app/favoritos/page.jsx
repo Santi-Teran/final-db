@@ -7,12 +7,12 @@ import { useEffect, useState } from "react";
 
 const Favoritos = () => {
   const [libros, setLibros] = useState([]);
-  const usuario = JSON.parse(localStorage.getItem("user"));
+  const usuario = JSON.parse(localStorage?.getItem("user"));
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const token = localStorage.getItem("token");
+        const token = localStorage?.getItem("token");
         const data = await fetch("/api/favoritos", {
           headers: {
             Authorization: `Bearer ${token}`,
