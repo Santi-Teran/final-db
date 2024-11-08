@@ -10,8 +10,10 @@ const Dashboard = () => {
     const fetchMetricas = async () => {
       try {
         const data = await fetch("/api/dashboard");
-        const response = await data.json();
-        setMetricas(response);
+        if (data.ok) {
+          const response = await data.json();
+          setMetricas(response);
+        }
       } catch (error) {
         console.error("Error fetching metricas:", error);
       }
@@ -21,6 +23,7 @@ const Dashboard = () => {
   }, []);
 
   if (!metricas) return <div>Cargando métricas...</div>;
+  console.log(metricas);
 
   return (
     <div className="flex text-dark-blue min-h-screen">
