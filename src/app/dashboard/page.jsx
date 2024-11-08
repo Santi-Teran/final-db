@@ -23,7 +23,6 @@ const Dashboard = () => {
   }, []);
 
   if (!metricas) return <div>Cargando métricas...</div>;
-  console.log(metricas);
 
   return (
     <div className="flex text-dark-blue min-h-screen">
